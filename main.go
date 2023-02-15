@@ -1,10 +1,10 @@
 package main
 
 import (
-	"IdeaProjects//funtemps/funfacts"
-	"IdeaProjects/funtemps/conv"
 	"flag"
 	"fmt"
+	"github.com/johannesUIA/funtemps/conv"
+	"github.com/johannesUIA/funtemps/funfacts"
 )
 
 // Definerer flag-variablene i hoved-"scope"
