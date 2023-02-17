@@ -3,6 +3,10 @@ package main
 import (
 	"flag"
 	"fmt"
+	"math"
+	"strconv"
+	"strings"
+
 	"github.com/johannesUIA/funtemps/conv"
 	"github.com/johannesUIA/funtemps/funfacts"
 )
@@ -99,11 +103,11 @@ func main() {
 	if funf == "terra" && isFlagPassed("funfacts") {
 		terrafact := funfacts.GetFunFacts(funf)
 		if t == "C" {
-			fmt.Printf("%s %.2f °C. %s %.f °C. \n%s %d °C.", terrafact[0], 56.7, terrafact[1], -89.4, terrafact[2], 9118)
+			fmt.Printf("%s %s °C. %s %s °C. \n%s %s °C.", terrafact[0], formatNumber(56.7), terrafact[1], formatNumber(-89.4), terrafact[2], formatNumber(9118))
 		} else if t == "K" {
-			fmt.Printf("%s %.2f K. %s %.2f \n%s %.2f K.", terrafact[0], conv.CelsiusToKelvin(56.7), terrafact[1], conv.CelsiusToKelvin(-89.4), terrafact[2], conv.CelsiusToKelvin(9118))
+			fmt.Printf("%s %s K. %s %s \n%s %s K.", terrafact[0], formatNumber(conv.CelsiusToKelvin(56.7)), terrafact[1], formatNumber(conv.CelsiusToKelvin(-89.4)), terrafact[2], formatNumber(conv.CelsiusToKelvin(9118)))
 		} else if t == "F" {
-			fmt.Printf("%s %.2f °F. %s %.2f \n%s %.2f °F.", terrafact[0], conv.CelsiusToFarhenheit(56.7), terrafact[1], conv.CelsiusToFarhenheit(-89.4), terrafact[2], conv.CelsiusToFarhenheit(9118))
+			fmt.Printf("%s %s °F. %s %s \n%s %s °F.", terrafact[0], formatNumber(conv.CelsiusToFarhenheit(56.7)), terrafact[1], formatNumber(conv.CelsiusToFarhenheit(-89.4)), terrafact[2], formatNumber(conv.CelsiusToFarhenheit(9118)))
 		}
 	}
 
@@ -111,11 +115,11 @@ func main() {
 	if funf == "sun" && isFlagPassed("funfacts") {
 		sunfact := funfacts.GetFunFacts(funf)
 		if t == "C" {
-			fmt.Printf("%s %.2d °C.\n%s %.2f °C.", sunfact[0], 15000000, sunfact[1], conv.KelvinToCelcius(5778))
+			fmt.Printf("%s %s °C.\n%s %s °C.", sunfact[0], formatNumber(15000000), sunfact[1], formatNumber(conv.KelvinToCelcius(5778)))
 		} else if t == "K" {
-			fmt.Printf("%s %.2f K.\n%s %d K.", sunfact[0], conv.CelsiusToKelvin(15000000), sunfact[1], 5778)
+			fmt.Printf("%s %s K.\n%s %s K.", sunfact[0], formatNumber(conv.CelsiusToKelvin(15000000)), sunfact[1], formatNumber(5778))
 		} else if t == "F" {
-			fmt.Printf("%s %.2f °F.\n%s %.2f °F.", sunfact[0], conv.CelsiusToFarhenheit(15000000), sunfact[1], conv.CelsiusToFarhenheit(5778))
+			fmt.Printf("%s %s °F.\n%s %s °F.", sunfact[0], formatNumber(conv.CelsiusToFarhenheit(15000000)), sunfact[1], formatNumber(conv.CelsiusToFarhenheit(5778)))
 		}
 	}
 
@@ -123,13 +127,35 @@ func main() {
 	if funf == "luna" && isFlagPassed("funfacts") {
 		lunafact := funfacts.GetFunFacts(funf)
 		if t == "C" {
-			fmt.Printf("%s %d °C.\n%s %d °C.", lunafact[0], -183, lunafact[1], 106)
+			fmt.Printf("%s %s °C.\n%s %s °C.", lunafact[0], formatNumber(-183), lunafact[1], formatNumber(106))
 		} else if t == "K" {
-			fmt.Printf("%s %.2f K.\n%s %.2f K.", lunafact[0], conv.CelsiusToKelvin(-183), lunafact[1], conv.CelsiusToKelvin(106))
+			fmt.Printf("%s %s K.\n%s %s K.", lunafact[0], formatNumber(conv.CelsiusToKelvin(-183)), lunafact[1], formatNumber(conv.CelsiusToKelvin(106)))
 		} else if t == "F" {
-			fmt.Printf("%s %.2f °F.\n%s %.2f °F.", lunafact[0], conv.CelsiusToFarhenheit(-183), lunafact[1], conv.CelsiusToFarhenheit(106))
+			fmt.Printf("%s %s °F.\n%s %s °F.", lunafact[0], formatNumber(conv.CelsiusToFarhenheit(-183)), lunafact[1], formatNumber(conv.CelsiusToFarhenheit(106)))
 		}
 	}
+}
+
+// Denne funksjonen er med på å hjelpe oss med å finne løsningen av formaterting av tall og desimaler bedre.
+// Jeg har sammen med Martin Steiro og Johannes Aslaksen benyttet ChatGPT med å hjelpe oss med å finne forslag til hvordan vi kunne løse dette.
+func formatNumber(num float64) string {
+	// Convert the number to a string with a maximum of 2 decimal places
+	str := strconv.FormatFloat(num, 'f', 2, 64)
+
+	// Remove any trailing zeros from the decimal part
+	for str[len(str)-1] == '0' {
+		str = str[:len(str)-1]
+	}
+
+	// Add spaces for big numbers
+	if math.Abs(num) >= 1000 {
+		i := strings.Index(str, ".")
+		for j := i - 3; j > 0; j -= 3 {
+			str = str[:j] + " " + str[j:]
+		}
+	}
+
+	return str
 }
 
 // Funksjonen sjekker om flagget er spesifisert på kommandolinje
