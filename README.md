@@ -1,5 +1,5 @@
 #### funtemps
-Funtemps står for funfacts temprature og er en oppgave som ble publisert den xx januar på https://uia-worker.github.io/is105komp/testing.html. Hovedmålet med oppgaven var å prøve seg ut på test-drevet utvikling. Eleven ble tildelt en mal for repositorien funtemps gjennom github.com. I repositorien funtemps var det en gitt mappe struktur som skulle følge med undermappene conv og funfacts. 
+Funtemps står for funfacts temprature og er en oppgave som ble publisert i januar på https://uia-worker.github.io/is105komp/testing.html. Hovedmålet med oppgaven var å prøve seg ut på test-drevet utvikling. Eleven ble tildelt en mal for repositorien funtemps gjennom github.com. I repositorien funtemps var det en gitt mappe struktur som skulle følge med undermappene conv og funfacts. 
 
 #### Formål
 Formålen med oppgaven var å sette sammen de ulike abstraksjonene fra repositorien og konfigurere det slik at det endrer som et program som kan konvertere ulike tempratur enheter og skrive ut funfacts. For å kunne gjøre testene fra pakke-mappene converter (conv) og funfacts operativ måtte flagg konfigureres. Blant annet Luna, Terra og Sun. For konvertering av tempratur fra en enhet til en annen måtte flagg variablene C, F og K konfigureres og -t for temprature. 
