@@ -14,7 +14,7 @@ Main.go er et program som tar input av tempraturer i enhetene Kelvin, Celsius og
 #### Funfacts
 Mappe-pakken funfacts inneholder to filer funfacts.go inneholder en funksjone GetFunFacts og en struktur med tre felt. I disse feltene står det ulike Funfacts il flaggene Luna, Terra og Sun i form av String. Disse blir hentet opp av GetFunFact funksjonen når den påkalles.
 
-This code is testing a function called GetFunFacts. It is testing to see if the function returns the expected output based on the input string. It creates a test struct which contains an input string and and the expected output. It then creates a slice of tests which contain different input strings and the corresponding output. Finally, it runs a for loop over the tests and compares the expected output with the output from the GetFunFacts function. If the outputs are not equal, it will return an error.
+  It creates a test struct which contains an input string and and the expected output. It then creates a slice of tests which contain different input strings and the corresponding output. Finally, it runs a for loop over the tests and compares the expected output with the output from the GetFunFacts function. If the outputs are not equal, it will return an error.
 
 #### Refleksjon
 
